@@ -1,1 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>5 meses contigo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbe8ec;--bg2:#f4c9d3;--ink:#3b1530;--soft:#8a5470;--rose:#c8365a;--glow:#f3b24a;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e0d1b;--bg2:#3a1331;--ink:#fbe3e8;--soft:#d3a1b6;--rose:#ef5d82;--glow:#f6c06a}}
+:root[data-theme="dark"]{--bg:#1e0d1b;--bg2:#3a1331;--ink:#fbe3e8;--soft:#d3a1b6;--rose:#ef5d82;--glow:#f6c06a}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(120% 80% at 50% 100%,var(--bg2),var(--bg));color:var(--ink);font-family:Nunito,system-ui,sans-serif;overflow:hidden}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility .9s}
+.scene.on{opacity:1;visibility:visible}
+.serif{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500}
+/* sobre */
+.to{font-size:2.1rem;margin:0 0 28px;text-align:center}
+.env{position:relative;width:min(300px,78vw);height:200px;border:0;background:none;padding:0;cursor:pointer;perspective:700px}
+.env .body{position:absolute;inset:0;background:var(--rose);border-radius:6px;box-shadow:0 18px 40px rgba(60,10,40,.28)}
+.env .body::before,.env .body::after{content:"";position:absolute;bottom:0;width:50%;height:100%;background:rgba(255,255,255,.14)}
+.env .body::before{left:0;clip-path:polygon(0 0,100% 100%,0 100%)}
+.env .body::after{right:0;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.env .flap{position:absolute;left:0;top:0;width:100%;height:60%;background:var(--rose);filter:brightness(.88);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .9s ease}
+.env .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:1.6rem;z-index:2;transition:opacity .4s;animation:beat 1.6s ease-in-out infinite}
+.env.open .flap{transform:rotateX(180deg)}
+.env.open .seal{opacity:0;animation:none}
+.hint{margin-top:26px;color:var(--soft);font-size:.95rem}
+@keyframes beat{50%{transform:translate(-50%,-50%) scale(1.18)}}
+/* mensaje */
+.msg{max-width:30rem;min-height:15rem;display:flex;align-items:center}
+.msg p{margin:0;font-size:clamp(1.45rem,5.6vw,1.9rem);line-height:1.38;text-align:left;transition:opacity .6s ease,transform .6s ease}
+.msg p.out{opacity:0;transform:translateY(8px)}
+.btn{margin-top:30px;font:600 1rem Nunito,sans-serif;color:#fff;background:var(--rose);border:0;border-radius:999px;padding:14px 30px;cursor:pointer;box-shadow:0 8px 22px rgba(200,54,90,.35)}
+.btn:focus-visible,.env:focus-visible{outline:3px solid var(--glow);outline-offset:4px}
+.dots{display:flex;gap:7px;margin-top:22px}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--soft);opacity:.3;transition:opacity .4s}
+.dots i.d{opacity:1;background:var(--rose)}
+/* ramo */
+svg.bq{width:min(380px,92vw);height:auto;max-height:62vh;overflow:visible}
+.stem{fill:none;stroke:#4d7d4a;stroke-width:4;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420}
+.on .stem{animation:grow 1.6s ease forwards}
+.rose{transform-box:fill-box;transform-origin:center;transform:scale(0) rotate(-40deg)}
+.on .rose{animation:bloom 1.4s cubic-bezier(.2,1.3,.4,1) forwards;animation-delay:var(--d)}
+.bow{opacity:0}
+.on .bow{animation:fade 1s ease 2.6s forwards}
+@keyframes grow{to{stroke-dashoffset:0}}
+@keyframes bloom{to{transform:scale(1) rotate(0)}}
+@keyframes fade{to{opacity:1}}
+.final{text-align:center;opacity:0;margin-top:6px}
+.on .final{animation:fade 1.4s ease 3.2s forwards}
+.final .serif{font-size:2.2rem;margin:0}
+.final small{display:block;color:var(--soft);margin-top:6px;font-size:1rem}
+.petal{position:fixed;top:-30px;width:14px;height:18px;background:var(--rose);border-radius:60% 0 60% 0;opacity:.8;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--x),110vh) rotate(540deg);opacity:.2}}
+@media (prefers-reduced-motion:reduce){
+  .env .seal{animation:none}
+  .on .stem,.on .rose,.on .bow,.on .final{animation-duration:.01s;animation-delay:0s}
+  .petal{display:none}
+}
+</style>
+</head>
+<body>
+
+<section class="scene on" id="s1">
+  <h1 class="to serif">Para mi amor</h1>
+  <button class="env" id="env" aria-label="Abrir el sobre"><div class="body"></div><div class="flap"></div><div class="seal">❤️</div></button>
+  <div class="hint">Toca el sobre</div>
+</section>
+
+<section class="scene" id="s2">
+  <div class="msg"><p class="serif" id="txt"></p></div>
+  <div class="dots" id="dots"></div>
+  <button class="btn" id="next">Seguir</button>
+</section>
+
+<section class="scene" id="s3">
+  <svg class="bq" id="bq" viewBox="0 0 360 440" aria-label="Un ramo de rosas"></svg>
+  <div class="final">
+    <p class="serif">Feliz 5 meses, mi amor</p>
+    <small>Te amo ❤️</small>
+  </div>
+</section>
+
+<script>
+var paras=[
+"Mi amor, hoy cumplimos 5 meses y te amo muchísimo. Me encantas, y no solo por lo linda que eres, sino por cómo eres conmigo, por cómo me escuchas y por cómo siempre tratamos de apoyarnos, incluso cuando las cosas se ponen difíciles.",
+"Te conozco hace dos años y la verdad es que ya éramos importantes el uno para el otro mucho antes de ser novios. Por eso estos 5 meses se sienten tan naturales y tan bonitos, como si todo hubiera ido cayendo en su lugar.",
+"Hemos pasado muchas cosas y aun así aquí estamos, juntos, eligiéndonos. Eso para mí vale mucho. Contigo me siento tranquilo, me siento en casa, y voy a seguir esforzándome para que lo nuestro funcione, porque tú lo vales.",
+"Sé que no siempre soy perfecto, pero quiero que sepas que lo intento todos los días y que contigo quiero ser mejor. Eres mi cable a tierra, la persona que me ayuda a ver las cosas con calma cuando todo se siente demasiado.",
+"Gracias por tu paciencia, por tu cariño y por quedarte a mi lado. Me haces muy feliz, y quiero que nunca lo dudes. Ojalá este sea solo el comienzo de muchos meses y muchos años más juntos.",
+"Feliz 5 meses, mi amor. Te amo ❤️"
+];
+var $=function(i){return document.getElementById(i)};
+var i=0,txt=$("txt"),next=$("next"),dots=$("dots");
+paras.forEach(function(){dots.appendChild(document.createElement("i"))});
+function show(n){
+  txt.textContent=paras[n];
+  txt.classList.remove("out");
+  [].forEach.call(dots.children,function(d,k){d.classList.toggle("d",k<=n)});
+  next.textContent=n===paras.length-1?"Tengo algo para ti 🌹":"Seguir";
+}
+$("env").addEventListener("click",function(){
+  this.classList.add("open");
+  setTimeout(function(){$("s1").classList.remove("on");$("s2").classList.add("on");show(0)},1100);
+},{once:true});
+next.addEventListener("click",function(){
+  if(i===paras.length-1){$("s2").classList.remove("on");$("s3").classList.add("on");petals();return}
+  txt.classList.add("out");
+  setTimeout(function(){i++;show(i)},550);
+});
+/* ramo */
+function rose(x,y,s,d,c){
+  var a="",k;
+  for(k=0;k<5;k++)a+='<ellipse rx="22" ry="30" cy="-14" transform="rotate('+72*k+')" fill="'+c[0]+'"/>';
+  for(k=0;k<4;k++)a+='<ellipse rx="15" ry="21" cy="-9" transform="rotate('+(90*k+20)+')" fill="'+c[1]+'"/>';
+  for(k=0;k<3;k++)a+='<ellipse rx="9" ry="13" cy="-5" transform="rotate('+(120*k+40)+')" fill="'+c[2]+'"/>';
+  a+='<path d="M0 0c4 0 5-5 1-6s-8 2-6 7 9 4 11-1" fill="none" stroke="'+c[3]+'" stroke-width="1.6" stroke-linecap="round"/>';
+  return '<g transform="translate('+x+' '+y+') scale('+s+')"><g class="rose" style="--d:'+d+'s">'+a+'</g></g>';
+}
+var R=[[180,105,1.15,1.2],[105,150,.95,1.5],[255,150,.95,1.7],[140,215,.9,1.9],[220,215,.9,2.1],[62,240,.78,2.3],[298,240,.78,2.5]];
+var col=["#b3223f","#d6385a","#ef6a86","#8f1530"],svg="";
+R.forEach(function(r){svg+='<path class="stem" d="M'+r[0]+' '+r[1]+'C'+r[0]+' 300 '+(180+(r[0]-180)*.12)+' 340 180 400"/>'});
+R.forEach(function(r){svg+=rose(r[0],r[1],r[2],r[3],col)});
+svg+='<g class="bow"><path d="M150 372q30 14 60 0l-6 30q-24 10-48 0z" fill="#c8365a"/><ellipse cx="160" cy="372" rx="20" ry="11" fill="#ef5d82" transform="rotate(-18 160 372)"/><ellipse cx="200" cy="372" rx="20" ry="11" fill="#ef5d82" transform="rotate(18 200 372)"/><circle cx="180" cy="376" r="7" fill="#8f1530"/></g>';
+$("bq").innerHTML=svg;
+function petals(){
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  var n=0,t=setInterval(function(){
+    var p=document.createElement("span");p.className="petal";
+    p.style.left=Math.random()*100+"vw";
+    p.style.setProperty("--x",(Math.random()*120-60)+"px");
+    p.style.animationDuration=(5+Math.random()*4)+"s";
+    document.body.appendChild(p);setTimeout(function(){p.remove()},9500);
+    if(++n>45)clearInterval(t);
+  },380);
+}
+</script>
+</body>
+</html>
 
